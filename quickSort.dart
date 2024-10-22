@@ -1,36 +1,34 @@
-bool checkPalindrome(dynamic input) {
-  // Convert numeric input to string
-  String word = input.toString();
-
-  // Remove spaces and punctuation, and convert to lowercase
-  word = word.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '').toLowerCase();
-
-  // Check if the cleaned string is a palindrome
-  for (int i = 0; i < word.length ~/ 2; i++) {
-    if (word[i] != word[word.length - i - 1]) {
-      return false;
-    }
-  }
-  return true;
+void main() {
+  List<int> list = [7, 2, 1, 8, 6, 3, 5, 4];
+  List<int> result = quickSort(list, 0, list.length - 1);
+  print(result);
 }
 
-void main() {
-  String word = "mum";
-  int number = 12321;
-
-  // Check if the string is a palindrome
-  bool isWordPalindrome = checkPalindrome(word);
-  bool isNumberPalindrome = checkPalindrome(number);
-
-  if (isWordPalindrome) {
-    print("\"$word\" is a palindrome...");
-  } else {
-    print("\"$word\" is not a palindrome...");
+List<int> quickSort(List<int> list, int low, int high) {
+  if (low < high) {
+    int pivotIndex = partition(list, low, high);
+    quickSort(list, low, pivotIndex - 1);
+    quickSort(list, pivotIndex + 1, high);
   }
+  return list;
+}
 
-  if (isNumberPalindrome) {
-    print("$number is a palindrome...");
-  } else {
-    print("$number is not a palindrome...");
+int partition(List<int> list, int low, int high) {
+  int pivot = list[high];  // Pivot is the last element
+  int i = low - 1;  // Pointer for the smaller element
+
+  for (int j = low; j < high; j++) {
+    if (list[j] < pivot) {
+      i++;
+      swap(list, i, j);
+    }
   }
+  swap(list, i + 1, high);  // Place the pivot in the correct position
+  return i + 1;  // Return the pivot index
+}
+
+void swap(List<int> list, int i, int j) {
+  int temp = list[i];
+  list[i] = list[j];
+  list[j] = temp;
 }
