@@ -1,9 +1,10 @@
 import 'dart:io';
 
+// Function that prompts the user for a number and returns it as a double
 double numInput(String prompt) {
-  print(prompt);
-  double myNum = double.parse(stdin.readLineSync()!);
-  return myNum;
+  print(prompt); // Displays the prompt message to the user
+  double myNum = double.parse(stdin.readLineSync()!); // Read the user's input as a string and convert it to a double
+  return myNum; // Returns the converted number
 }
 
 String operandChoice() {
